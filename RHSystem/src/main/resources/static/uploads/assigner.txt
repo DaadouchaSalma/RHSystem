@@ -1,0 +1,236 @@
+import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
+import {
+  CForm,
+  CFormLabel,
+  CFormInput,
+  CFormTextarea,
+  CButton,
+  CContainer,
+  CRow,
+  CCol,
+  CCard,
+  CCardBody,
+  CMultiSelect,
+} from '@coreui/react-pro';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const FormationForm = () => {
+  const [titre, setTitre] = useState('');
+  const [description, setDescription] = useState('');
+  const [formateur, setFormateur] = useState('');
+  const [dateDebutF, setDateDebutF] = useState('');
+  const [dateFinF, setDateFinF] = useState('');
+  const [employees, setEmployees] = useState([]);
+  const [selectedEmployees, setSelectedEmployees] = useState([]);
+  const [photo, setPhotoPath] = useState(null);
+
+  const fileInputRef = useRef(null); // Ref for the file input
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:8082/api/formations/employees')
+      .then((response) => {
+        const options = response.data.map((employee) => ({
+          value: employee.matricule,
+          label: `${employee.nom} (${employee.mail})`,
+        }));
+        setEmployees(options);
+      })
+      .catch((error) => {
+        console.error('Error fetching employees:', error);
+      });
+  }, []);
+
+  const handleDateChange = (field, value) => {
+    if (field === 'dateDebutF') {
+      setDateDebutF(value);
+
+      // Immediate validation
+      if (new Date(value) >= new Date(dateFinF)) {
+        toast.warning('⚠️ La date de début doit être avant la date de fin.', {
+          position: 'top-right',
+          autoClose: 3000,
+        });
+      }
+    } else if (field === 'dateFinF') {
+      setDateFinF(value);
+
+      // Immediate validation
+      if (new Date(value) <= new Date(dateDebutF)) {
+        toast.warning('⚠️ La date de fin doit être après la date de début.', {
+          position: 'top-right',
+          autoClose: 3000,
+        });
+      }
+    }
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file && !file.type.startsWith('image/')) {
+      alert('Veuillez télécharger une image!');
+      e.target.value = null; // Reset the file input
+      setPhotoPath(null);
+    } else {
+      setPhotoPath(file);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const startDate = new Date(dateDebutF);
+    const endDate = new Date(dateFinF);
+
+    // Date validation
+    if (endDate <= startDate) {
+      toast.error('❌ La date de fin doit être après la date de début.', {
+        position: 'top-right',
+        autoClose: 3000,
+      });
+      return;
+    }
+
+    const formationData = {
+      titre,
+      description,
+      formateur,
+      dateDebutF,
+      dateFinF,
+      employes: selectedEmployees.map((employee) => ({
+        matricule: employee.value,
+      })),
+    };
+
+    const formData = new FormData();
+    formData.append('formation', new Blob([JSON.stringify(formationData)], { type: 'application/json' }));
+    if (photo) {
+      formData.append('photo', photo);
+    }
+
+    try {
+      await axios.post('http://localhost:8082/api/formations', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      toast.success('🎉 Formation créée avec succès!', {
+        position: 'top-right',
+        autoClose: 3000,
+      });
+
+      // Reset form fields
+      setTitre('');
+      setDescription('');
+      setFormateur('');
+      setDateDebutF('');
+      setDateFinF('');
+      setSelectedEmployees([]);
+      setPhotoPath(null);
+
+      // Clear the file input field
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    } catch (error) {
+      toast.error('❌ Erreur lors de la création de la formation!', {
+        position: 'top-right',
+        autoClose: 3000,
+      });
+      console.error('Erreur lors de la création de la formation:', error);
+    }
+  };
+
+  return (
+    <CContainer className="mt-4">
+      <ToastContainer />
+      <CRow className="justify-content-center">
+        <CCol md={8}>
+          <CCard>
+            <CCardBody>
+              <h3 className="mb-4">Créer Une Formation</h3>
+              <CForm onSubmit={handleSubmit}>
+                <CFormLabel htmlFor="titre">Titre:</CFormLabel>
+                <CFormInput
+                  type="text"
+                  id="titre"
+                  value={titre}
+                  onChange={(e) => setTitre(e.target.value)}
+                  required
+                  className="mb-3"
+                />
+
+                <CFormLabel htmlFor="description">Description:</CFormLabel>
+                <CFormTextarea
+                  id="description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  required
+                  className="mb-3"
+                />
+
+                <CFormLabel htmlFor="formateur">Formateur:</CFormLabel>
+                <CFormInput
+                  type="text"
+                  id="formateur"
+                  value={formateur}
+                  onChange={(e) => setFormateur(e.target.value)}
+                  required
+                  className="mb-3"
+                />
+
+                <CFormLabel htmlFor="photo">Photo Du Formateur:</CFormLabel>
+                <CFormInput
+                  type="file"
+                  id="photo"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  ref={fileInputRef}
+                  className="mb-3"
+                />
+
+                <CFormLabel htmlFor="dateDebut">Date de début:</CFormLabel>
+                <CFormInput
+                  type="date"
+                  id="dateDebut"
+                  value={dateDebutF}
+                  onChange={(e) => handleDateChange('dateDebutF', e.target.value)}
+                  required
+                  className="mb-3"
+                />
+
+                <CFormLabel htmlFor="dateFin">Date de fin:</CFormLabel>
+                <CFormInput
+                  type="date"
+                  id="dateFin"
+                  value={dateFinF}
+                  onChange={(e) => handleDateChange('dateFinF', e.target.value)}
+                  required
+                  className="mb-3"
+                />
+
+                <CFormLabel>Assigner Les Employés:</CFormLabel>
+                <CMultiSelect
+                  options={employees}
+                  value={selectedEmployees}
+                  onChange={(selected) => setSelectedEmployees(selected)}
+                  selectionType="tags"
+                  multiple
+                  className="mb-3"
+                />
+
+                <CButton type="submit" color="primary">
+                  Créer
+                </CButton>
+              </CForm>
+            </CCardBody>
+          </CCard>
+        </CCol>
+      </CRow>
+    </CContainer>
+  );
+};
+
+export default FormationForm;

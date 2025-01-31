@@ -1,0 +1,99 @@
+controller: 
+
+package com.example.rhsystem.Controllers;
+
+import com.example.rhsystem.Services.EmployeService;
+import com.example.rhsystem.model.Employe;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+@CrossOrigin(origins = "http://localhost:3000")
+@RestController
+@RequestMapping("/api/employes")
+public class EmployeController {
+
+    @Autowired
+    EmployeService employeService;
+    @CrossOrigin(origins = "http://localhost:3000")
+    
+    public ResponseEntity<Employe> ajouterEmploye(@RequestBody Employe employe){
+        try {
+      
+
+            
+            Employe savedEmploye = employeService.saveEmployee(employe);
+
+            return ResponseEntity.ok(savedEmploye);
+
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+}
+
+
+service : 
+package com.example.rhsystem.Services;
+
+import com.example.rhsystem.Repository.EmployeRepo;
+import com.example.rhsystem.model.Employe;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
+@Service
+public class EmployeService {
+    @Autowired
+    EmployeRepo empRepo;
+    private final String uploadDir="src/main/resources/uploads";
+    public String saveCv(MultipartFile file) throws IOException {
+        if (file.isEmpty()) {
+            throw new IOException("File is empty");
+        }
+        // Créer le dossier de téléchargement s'il n'existe pas
+        File directory = new File(uploadDir);
+        if (!directory.exists()) {
+            directory.mkdirs(); // Crée le répertoire si nécessaire
+        }
+        System.out.println("Nom de fichier original: " + file.getOriginalFilename());
+        // Nettoyer le nom de fichier en enlevant les caractères spéciaux
+        String sanitizedFileName = System.currentTimeMillis() + "_" + file.getOriginalFilename().replaceAll("[^a-zA-Z0-9\\.\\-]", "_");
+        System.out.println("Nom de fichier sauvegardé: " + sanitizedFileName);
+        Path filePath = Paths.get(uploadDir, sanitizedFileName);
+
+        // Enregistrer le fichier
+        Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+        return sanitizedFileName;
+    }
+    public Employe saveEmployee(Employe employe){
+        System.out.println("Matricule: " + employe.getMatricule());
+        System.out.println("Nom: " + employe.getNom());
+        System.out.println("Prenom: " + employe.getPrenom());
+        System.out.println("Mail: " + employe.getMail());
+        System.out.println("NumTelephone: " + employe.getNumTelephone());
+        System.out.println("Poste: " + employe.getPoste());
+
+        return empRepo.save(employe) ;
+    }
+}
