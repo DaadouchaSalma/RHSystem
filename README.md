@@ -1,6 +1,7 @@
 # Mon Projet (Backend + Frontend)
+As companies become more digital, human resources processes are evolving toward more centralized and automated solutions. The increasing complexity of personnel management, recruitment, payroll, and training needs require increasingly powerful tools.
 
-A full-stack project consisting of a Spring Boot backend and a React.js frontend. This project is designed to [explain what your project does, its main features, and any specific goals].
+This project aims to develop an **innovative and secure HR system** to meet these demands by offering optimized and automated human resources management.
 
 ## Table of Contents
 - [Project Overview](#project-overview)
@@ -14,8 +15,14 @@ A full-stack project consisting of a Spring Boot backend and a React.js frontend
 This project consists of two parts:
 1. **Backend**: Built with [Spring Boot](https://spring.io/projects/spring-boot).
 2. **Frontend**: Built with [React.js](https://reactjs.org/).
-
----
+   
+The HR system includes the following features:
+- **Simplified Employee Management**: HR managers will have access to up-to-date information (contracts, salaries, absences), and employees will be able to manage certain tasks via an online portal.
+- **Leave Management Automation**: Approval workflows, automated leave balance calculations, and real-time notifications for employees and managers.
+- **Optimized Recruitment Management**: Allows for approval or rejection of applications, management of job postings, and centralization of candidate data.
+- **Automated Payslip Generation**: Saves time and avoids errors related to manual calculations.
+- **Training and Certification Management**: HR managers can invite employees to training programs, which they can accept or decline, with the ability to collect feedback.
+- **Centralized HR Processes**: Provides a clear and structured overview for HR managers, employees, and candidates to streamline HR activities.
 
 ## Backend Setup
 1. Clone the repository:
