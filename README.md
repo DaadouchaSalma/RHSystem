@@ -40,11 +40,11 @@ The HR system includes the following features:
 3. Run the frontend:
    npm start
 ## Technologies Used
-·  Backend: Spring Boot, Java, MySQL (or other databases)
-·  Frontend: React.js, Axios, React Router
+-  **Backend** : Spring Boot, Java, MySQL
+-  **Frontend** : React.js, Axios, React Router
 ## How to Contribute
 1. Fork the repository.
 2. Create a feature branch (git checkout -b feature-branch).
-3. Commit your changes (git commit -am 'Add feature').
+3. Commit your changes (git commit -m 'Add feature').
 4. Push to your branch (git push origin feature-branch).
 5. Open a pull request.(Please use Pull Request)
