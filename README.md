@@ -28,20 +28,22 @@ The HR system includes the following features:
 1. Clone the repository:
    ```bash
    git clone https://github.com/DaadouchaSalma/RHSystem.git
-2. Navigate to the RHSystem/ directory:
+2. Navigate to the RHSystem/ directory:  
    cd RHSystem/RHSystem
-3. Run the backend application using Maven:
+4. Run the backend application using Maven:  
    mvn spring-boot:run
 ## Fontend Setup
-1. Navigate to the coreui-pro-react-admin-template-theme-default-vite-v5.2.0/ directory:
+1. Navigate to the coreui-pro-react-admin-template-theme-default-vite-v5.2.0/ directory:  
    cd RHSystem/coreui-pro-react-admin-template-theme-default-vite-v5.2.0
-2. Install dependencies:
+2. Install dependencies:  
     npm install
-3. Run the frontend:
+3. Run the frontend:  
    npm start
 ## Technologies Used
--  **Backend** : Spring Boot, Java, MySQL
--  **Frontend** : React.js, Axios, React Router
+-  **Backend** :
+  Spring Boot, Java, MySQL
+-  **Frontend** :
+   React.js, Axios, React Router
 ## How to Contribute
 1. Fork the repository.
 2. Create a feature branch (git checkout -b feature-branch).
