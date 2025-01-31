@@ -17,8 +17,8 @@ This project consists of two parts:
 2. **Frontend**: Built with [React.js](https://reactjs.org/).
    
 The HR system includes the following features:
-- **Simplified Employee Management**: HR managers will have access to up-to-date information (contracts, salaries, absences), and employees will be able to manage certain tasks via an online portal.
-- **Leave Management Automation**: Approval workflows, automated leave balance calculations, and real-time notifications for employees and managers.
+- **Simplified Employee Management**: HR managers will have access to up-to-date information (contracts, salaries), and employees will be able to manage certain tasks via an online portal.
+- **Leave Management Automation**: Approval workflows, automated leave balance calculations.
 - **Optimized Recruitment Management**: Allows for approval or rejection of applications, management of job postings, and centralization of candidate data.
 - **Automated Payslip Generation**: Saves time and avoids errors related to manual calculations.
 - **Training and Certification Management**: HR managers can invite employees to training programs, which they can accept or decline, with the ability to collect feedback.
