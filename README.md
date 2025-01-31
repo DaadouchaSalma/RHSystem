@@ -5,6 +5,7 @@ This project aims to develop an **innovative and secure HR system** to meet thes
 
 ## Table of Contents
 - [Project Overview](#project-overview)
+- [Screenshots](#screenshots)
 - [Backend Setup](#backend-setup)
 - [Frontend Setup](#frontend-setup)
 - [Technologies Used](#technologies-used)
@@ -23,6 +24,35 @@ The HR system includes the following features:
 - **Automated Payslip Generation**: Saves time and avoids errors related to manual calculations.
 - **Training and Certification Management**: HR managers can invite employees to training programs, which they can accept or decline, with the ability to collect feedback.
 - **Centralized HR Processes**: Provides a clear and structured overview for HR managers, employees, and candidates to streamline HR activities.
+
+Here are some screenshots of the application:
+
+### Employee Management
+**Dashboard**  
+<img src="https://i.ibb.co/C5dGw0tR/dashboard1.png" alt="dashboard1" border="0">
+<img src="https://i.ibb.co/whYBtwYk/dashboard2.png" alt="dashboard2" border="0">
+<img src="https://i.ibb.co/qFMnNZ4Z/dashboard3.png" alt="dashboard3" border="0">  
+**Add Employee**  
+<img src="https://i.ibb.co/s9XXDsbb/ajouter-Employe-1.png" alt="ajouter-Employe-1" border="0">  
+<img src="https://i.ibb.co/23CBmYpw/ajouter-Employe-2.png" alt="ajouter-Employe-2" border="0">
+<img src="https://i.ibb.co/twfHZVkf/ajouter-Employe-3.png" alt="ajouter-Employe-3" border="0">  
+**Update Employee**  
+<img src="https://i.ibb.co/Csm9n3zw/Modifier-Employe-RH.png" alt="Modifier-Employe-RH" border="0">  
+**View Employees**  
+<img src="https://i.ibb.co/DDZLbZS9/consulter-Employe.png" alt="consulter-Employe" border="0">
+<img src="https://i.ibb.co/h17nvj5Z/recherche-Filtre.png" alt="recherche-Filtre" border="0">  
+### Leave Management  
+<img src="https://i.ibb.co/pBckyJ39/suiv-Solde.png" alt="suiv-Solde" border="0">
+<img src="https://i.ibb.co/NgMDvZTT/suiv-Conge.png" alt="suiv-Conge" border="0">
+<img src="https://i.ibb.co/mVysDNRW/demande-Cong.png" alt="demande-Cong" border="0">   
+### Trainig Management   
+<img src="https://i.ibb.co/mFFB98Ng/modifier-Formation-1.png" alt="modifier-Formation-1" border="0">
+<img src="https://i.ibb.co/6cZ80Vfh/modifier-Formation-2.png" alt="modifier-Formation-2" border="0">
+<img src="https://i.ibb.co/dsS8x6Nt/liste-Formation.png" alt="liste-Formation" border="0">
+<img src="https://i.ibb.co/b54Qfkps/formation-Id.png" alt="formation-Id" border="0">  
+<img src="https://i.ibb.co/W40Qs1Lx/consulter-Formation.png" alt="consulter-Formation" border="0">
+<img src="https://i.ibb.co/xtcHVqcs/ajout-Formation-1.png" alt="ajout-Formation-1" border="0">
+<img src="https://i.ibb.co/YBJ5MhPx/ajout-Formation-2.png" alt="ajout-Formation-2" border="0">  
 
 ## Backend Setup
 1. Clone the repository:
